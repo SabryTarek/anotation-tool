@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Annotation Tool</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <body>
+
+    <section class="controls">
+      <button id="openWavDir">Open Wav Folder</button>
+      <button id="revert" disabled>Revert</button>
+
+      <button id="openScriptDir">Open TransScript Folder</button>
+      <button>Save Transcript File</button>
+    </section>
+    
+    <section class="content">
+      <label for="markdown" hidden>Markdown Content</label>
+      <div class="rendered-html" id="html"></div>
+      <textarea class="raw-markdown" id="markdown"></textarea>
+    </section>
+    
+  </body>
+  <script src="renderer.js"></script>
+</html>
