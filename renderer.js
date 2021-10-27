@@ -1,14 +1,3 @@
-const { ipcRenderer } = require('electron');
-const ipc = ipcRenderer
-
-openWavDir.addEventListener('click', () => {
-  ipc.send('opendir')
-})
-
-
-openScriptDir.addEventListener('click', () => {
-  ipc.send('opendir')
-})
 
 // let filePath = null;
 // let originalContent = '';
@@ -191,3 +180,18 @@ openScriptDir.addEventListener('click', () => {
 //   createContextMenu().popup();
 // });
 
+const { ipcRenderer } = require('electron');
+const ipc = ipcRenderer
+
+
+openWavDir.addEventListener('click', () => {
+  ipc.send('opendir')
+})
+
+
+openScriptDir.addEventListener('click', () => {
+  ipc.send('opendir')
+})
+
+
+document.getElementById('raw-markdown').innerText = fileContent

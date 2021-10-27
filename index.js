@@ -1,8 +1,11 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, dialog, ipcMain } = require('electron')
+const {app, BrowserWindow, Menu, contextBridge,dialog, ipcMain } = require('electron')
 require('electron-reload')(__dirname)
 const path = require('path')
+const fs = require('fs')
 const ipc = ipcMain
+val = null
+
 
 function createWindow () {
   // Create the browser window.
@@ -24,7 +27,10 @@ function createWindow () {
 
   ipc.on('opendir', () => {
       console.log('choose your directory please')
-      dialog.showOpenDialog(mainWindow, {
+      contextBridge.exposeInMainWorld('API', {
+        
+      })
+      files = dialog.showOpenDialogSync(mainWindow, {
           title: 'عايز أيه',
           defaultPath: './',
           buttonLabel: "أحفظ يا حيوان",
@@ -34,15 +40,28 @@ function createWindow () {
             { name: 'Custom File Type', extensions: ['as'] },
             { name: 'All Files', extensions: ['*'] }
           ],
-          properties: ['openDirectory', 'multiSelections', 'showHiddenFiles']
-      }).then((result) => {
-          console.log(result.filePaths[0])
-          val = result.filePaths[0]
+          properties: ['openFile', 'multiSelections', 'showHiddenFiles']
       })
+      // .then((result) => {
+      //     console.log(result.filePaths[0])
+      //     val = result.filePaths[0]
+      // })
+      if(!files) return
+      console.log(files)
+      const filecontent = fs.readFileSync(files[0]).toString()
+      console.log(filecontent)
   })
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 }
+
+
+
+
+
+
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
